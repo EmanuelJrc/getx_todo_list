@@ -3,6 +3,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:getx_todo_list/app/core/values/colors.dart';
 import 'package:getx_todo_list/app/data/models/task.dart';
+import 'package:getx_todo_list/app/modules/Sidebar/custom_list.dart';
+import 'package:getx_todo_list/app/modules/Sidebar/settings.dart';
 import 'package:getx_todo_list/app/modules/home/controller.dart';
 import 'package:getx_todo_list/app/core/utils/extensions.dart';
 import 'package:getx_todo_list/app/modules/home/widgets/add_card.dart';
@@ -16,6 +18,37 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: <Color>[
+                  Colors.deepOrange,
+                  Colors.orangeAccent
+                ])),
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/images/list.png',
+                      width: 20,
+                      height: 20,
+                    ),
+                  ),
+                )),
+            CustomListTile(
+                Icons.person, 'Profile', () => selectedItem(context, 0)),
+            CustomListTile(Icons.notifications, 'Notification',
+                () => selectedItem(context, 1)),
+            CustomListTile(
+                Icons.settings, 'Settings', () => selectedItem(context, 2)),
+            CustomListTile(
+                Icons.lock, 'Log Out', () => selectedItem(context, 3)),
+          ],
+        ),
+      ),
+      // backgroundColor: Colors.black54, //Change the color of the main screen
       body: Obx(
         () => IndexedStack(
           index: controller.tabIndex.value,
@@ -122,5 +155,33 @@ class HomePage extends GetView<HomeController> {
         ),
       ),
     );
+  }
+
+// Set what you want the buttons in the sidebar to do
+
+  void selectedItem(BuildContext context, int index) {
+    Navigator.of(context).pop();
+    switch (index) {
+      case 0:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => SettingsPage(),
+        ));
+        break;
+      case 1:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => SettingsPage(),
+        ));
+        break;
+      case 2:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => SettingsPage(),
+        ));
+        break;
+      case 3:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => SettingsPage(),
+        ));
+        break;
+    }
   }
 }

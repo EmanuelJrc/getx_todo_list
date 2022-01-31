@@ -12,7 +12,9 @@ class ReportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SafeArea(
+    return Scaffold(
+        // backgroundColor: Colors.black87,
+        body: SafeArea(
       child: Obx(() {
         var createdTasks = homeCtrl.getTotalTask();
         var completedTasks = homeCtrl.getTotalDoneTask();

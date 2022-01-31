@@ -18,6 +18,8 @@ class DetailPage extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        // backgroundColor:
+        // Colors.black87, // Background color for entering a task thing box
         body: Form(
           key: homeCtrl.formKey,
           child: ListView(
