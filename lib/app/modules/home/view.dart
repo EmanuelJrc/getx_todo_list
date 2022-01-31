@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:getx_todo_list/app/core/values/colors.dart';
 import 'package:getx_todo_list/app/data/models/task.dart';
 import 'package:getx_todo_list/app/modules/Sidebar/custom_list.dart';
+import 'package:getx_todo_list/app/modules/Sidebar/language.dart';
 import 'package:getx_todo_list/app/modules/Sidebar/settings.dart';
 import 'package:getx_todo_list/app/modules/home/controller.dart';
 import 'package:getx_todo_list/app/core/utils/extensions.dart';
@@ -11,6 +12,7 @@ import 'package:getx_todo_list/app/modules/home/widgets/add_card.dart';
 import 'package:getx_todo_list/app/modules/home/widgets/add_dialog.dart';
 import 'package:getx_todo_list/app/modules/home/widgets/task_card.dart';
 import 'package:getx_todo_list/app/modules/report/view.dart';
+import 'package:getx_todo_list/theme/theme_service.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
@@ -42,9 +44,14 @@ class HomePage extends GetView<HomeController> {
             CustomListTile(Icons.notifications, 'Notification',
                 () => selectedItem(context, 1)),
             CustomListTile(
-                Icons.settings, 'Settings', () => selectedItem(context, 2)),
+              Icons.settings,
+              'Dark Mode',
+              () {
+                ThemeService().changeThemeMode();
+              },
+            ),
             CustomListTile(
-                Icons.lock, 'Log Out', () => selectedItem(context, 3)),
+                Icons.language, 'Language', () => selectedItem(context, 3)),
           ],
         ),
       ),
@@ -179,7 +186,7 @@ class HomePage extends GetView<HomeController> {
         break;
       case 3:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => SettingsPage(),
+          builder: (context) => LanguageSelector(),
         ));
         break;
     }

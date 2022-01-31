@@ -25,9 +25,9 @@ class TaskCard extends StatelessWidget {
         width: squareWidth / 2,
         height: squareWidth / 2,
         margin: EdgeInsets.all(3.0.wp),
-        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+        decoration: BoxDecoration(color: Colors.grey[100], boxShadow: [
           BoxShadow(
-            color: Colors.grey[300]!,
+            color: Colors.grey[600]!,
             blurRadius: 7,
             offset: const Offset(0, 7),
           )
@@ -69,6 +69,7 @@ class TaskCard extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12.0.sp,
+                      color: Colors.black,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
