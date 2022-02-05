@@ -40,18 +40,18 @@ class HomePage extends GetView<HomeController> {
                   ),
                 )),
             CustomListTile(
-                Icons.person, 'Profile', () => selectedItem(context, 0)),
-            CustomListTile(Icons.notifications, 'Notification',
+                Icons.person, 'Profile'.tr, () => selectedItem(context, 0)),
+            CustomListTile(Icons.notifications, 'Notification'.tr,
                 () => selectedItem(context, 1)),
             CustomListTile(
               Icons.settings,
-              'Dark Mode',
+              'Dark Mode'.tr,
               () {
                 ThemeService().changeThemeMode();
               },
             ),
             CustomListTile(
-                Icons.language, 'Language', () => selectedItem(context, 3)),
+                Icons.language, 'Language'.tr, () => selectedItem(context, 2)),
           ],
         ),
       ),
@@ -66,7 +66,7 @@ class HomePage extends GetView<HomeController> {
                   Padding(
                     padding: EdgeInsets.all(4.0.wp),
                     child: Text(
-                      'My List',
+                      'My List'.tr,
                       style: TextStyle(
                         fontSize: 24.0.sp,
                         fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class HomePage extends GetView<HomeController> {
                 if (controller.tasks.isNotEmpty) {
                   Get.to(() => AddDialog(), transition: Transition.downToUp);
                 } else {
-                  EasyLoading.showInfo('Please create your task type');
+                  EasyLoading.showInfo('Please create your task type'.tr);
                 }
               },
               child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
@@ -123,7 +123,7 @@ class HomePage extends GetView<HomeController> {
         },
         onAccept: (Task task) {
           controller.deleteTask(task);
-          EasyLoading.showSuccess('Delete Success');
+          EasyLoading.showSuccess('Delete Success'.tr);
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -140,7 +140,7 @@ class HomePage extends GetView<HomeController> {
             showUnselectedLabels: false,
             items: [
               BottomNavigationBarItem(
-                label: 'Home',
+                label: 'Home'.tr,
                 icon: Padding(
                   padding: EdgeInsets.only(right: 15.0.wp),
                   child: const Icon(
@@ -149,7 +149,7 @@ class HomePage extends GetView<HomeController> {
                 ),
               ),
               BottomNavigationBarItem(
-                label: 'Report',
+                label: 'Report'.tr,
                 icon: Padding(
                   padding: EdgeInsets.only(left: 15.0.wp),
                   child: const Icon(

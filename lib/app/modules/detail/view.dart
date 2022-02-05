@@ -76,7 +76,7 @@ class DetailPage extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        '$totalTodos Tasks',
+                        '$totalTodos Tasks'.tr,
                         style: TextStyle(
                           fontSize: 12.0.sp,
                           color: Colors.grey,
@@ -126,9 +126,11 @@ class DetailPage extends StatelessWidget {
                             var success =
                                 homeCtrl.addTodo(homeCtrl.editCtrl.text);
                             if (success) {
-                              EasyLoading.showSuccess('Todo task add success');
+                              EasyLoading.showSuccess(
+                                  'Todo task add success'.tr);
                             } else {
-                              EasyLoading.showError('Todo task already exists');
+                              EasyLoading.showError(
+                                  'Todo task already exists'.tr);
                             }
                             homeCtrl.editCtrl.clear();
                           }
@@ -137,7 +139,7 @@ class DetailPage extends StatelessWidget {
                       )),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your todo task';
+                      return 'Please enter your todo task'.tr;
                     }
                     return null;
                   },

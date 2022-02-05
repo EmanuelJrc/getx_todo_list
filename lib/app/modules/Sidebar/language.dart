@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:getx_todo_list/app/core/utils/extensions.dart';
 
 class LanguageSelector extends StatelessWidget {
-  final List locale = [
-    {'name': 'ENGLISH', 'locale': Locale('en', 'US')},
-    {'name': 'CROATIAN', 'locale': Locale('hr', 'CRO')},
-  ];
-
-  updateLanguage(Locale locale) {
-    Get.back();
-    Get.updateLocale(locale);
-  }
+  final lang = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +32,10 @@ class LanguageSelector extends StatelessWidget {
                   'English',
                   style: TextStyle(fontSize: 12.0.sp),
                 ),
-                onTap: () {},
+                onTap: () {
+                  var locale = Locale('en', 'US');
+                  Get.updateLocale(locale);
+                },
               ),
             ),
             Padding(
@@ -49,7 +45,10 @@ class LanguageSelector extends StatelessWidget {
                   'Croatian',
                   style: TextStyle(fontSize: 12.0.sp),
                 ),
-                onTap: () {},
+                onTap: () {
+                  var locale = Locale('hr', 'HR');
+                  Get.updateLocale(locale);
+                },
               ),
             ),
           ],

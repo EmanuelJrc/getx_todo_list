@@ -18,7 +18,7 @@ class DoingList extends StatelessWidget {
                 width: 65.0.wp,
               ),
               Text(
-                'Add Task',
+                'Add Task'.tr,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0.sp,
@@ -44,16 +44,16 @@ class DoingList extends StatelessWidget {
                               child: Checkbox(
                                 fillColor: MaterialStateProperty.resolveWith(
                                     (states) => Colors.grey),
-                                value: element['done'],
+                                value: element['done'.tr],
                                 onChanged: (value) {
-                                  homeCtrl.doneTodo(element['title']);
+                                  homeCtrl.doneTodo(element['title'.tr]);
                                 },
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 4.0.wp),
                               child: Text(
-                                element['title'],
+                                element['title'.tr],
                                 overflow: TextOverflow.ellipsis,
                               ),
                             )

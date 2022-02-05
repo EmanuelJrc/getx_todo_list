@@ -25,7 +25,7 @@ class AddCard extends StatelessWidget {
           await Get.defaultDialog(
               titlePadding: EdgeInsets.symmetric(vertical: 5.0.wp),
               radius: 5,
-              title: 'Task Type',
+              title: 'Task Type'.tr,
               content: Form(
                   key: homeCtrl.formKey,
                   child: Column(
@@ -40,7 +40,7 @@ class AddCard extends StatelessWidget {
                           ),
                           validator: (value) {
                             if (value == null || value.trim().isEmpty) {
-                              return 'Please enter your task title';
+                              return 'Please enter your task title'.tr;
                             }
                             return null;
                           },
@@ -90,7 +90,7 @@ class AddCard extends StatelessWidget {
                                   color: color);
                               Get.back();
                               homeCtrl.addTask(task)
-                                  ? EasyLoading.showSuccess('Create success')
+                                  ? EasyLoading.showSuccess('Create success'.tr)
                                   : EasyLoading.showError('Duplicated Task');
                             }
                           },
