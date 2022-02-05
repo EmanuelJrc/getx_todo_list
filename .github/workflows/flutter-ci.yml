@@ -41,7 +41,7 @@ jobs:
     #- run: flutter test
     
     # Build apk.
-    - run: flutter build apk
+    - run: flutter build apk --split-per-abi --no-tree-shake-icons
     
     # Upload generated apk to the artifacts.
     - name: Upload a Build Artifact
