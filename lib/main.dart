@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: LocalString(),
-      locale: Locale('en', 'US'),
+      locale: Get.deviceLocale,
+      fallbackLocale: Locale('en', 'US'),
       title: 'Todo List',
       theme: Themes().lightTheme,
       darkTheme: Themes().darkTheme,
