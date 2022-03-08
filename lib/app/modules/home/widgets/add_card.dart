@@ -91,7 +91,7 @@ class AddCard extends StatelessWidget {
                               Get.back();
                               homeCtrl.addTask(task)
                                   ? EasyLoading.showSuccess('Create success'.tr)
-                                  : EasyLoading.showError('Duplicated Task');
+                                  : EasyLoading.showError('Duplicated Task'.tr);
                             }
                           },
                           child: const Text('Confirm'))

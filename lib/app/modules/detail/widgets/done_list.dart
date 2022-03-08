@@ -20,7 +20,7 @@ class DoneList extends StatelessWidget {
                   vertical: 2.0.wp,
                   horizontal: 5.0.wp,
                 ),
-                child: Text('Completed.(${homeCtrl.doneTodos.length})'.tr,
+                child: Text('Completed(${homeCtrl.doneTodos.length})',
                     style: TextStyle(
                       fontSize: 14.0.sp,
                       color: Colors.grey,
@@ -59,7 +59,7 @@ class DoneList extends StatelessWidget {
                                 horizontal: 4.0.wp,
                               ),
                               child: Text(
-                                element['title'.tr],
+                                element['title'],
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   decoration: TextDecoration.lineThrough,

@@ -18,7 +18,7 @@ class Task extends Equatable {
     int? icon,
     String? color,
     List<dynamic>? todos,
-  }) => 
+  }) =>
       Task(
         title: title ?? this.title,
         icon: icon ?? this.icon,
@@ -27,18 +27,18 @@ class Task extends Equatable {
       );
 
   factory Task.fromJson(Map<String, dynamic> json) => Task(
-    title: json['title'],
-    icon: json['icon'],
-    color: json['color'],
-    todos: json['todos'],
-  );
+        title: json['title'],
+        icon: json['icon'],
+        color: json['color'],
+        todos: json['todos'],
+      );
 
   Map<String, dynamic> toJson() => {
-    'title': title,
-    'icon': icon,
-    'color': color,
-    'todos': todos,
-  };
+        'title': title,
+        'icon': icon,
+        'color': color,
+        'todos': todos,
+      };
 
   @override
   List<Object?> get props => [title, icon, color];

@@ -51,7 +51,7 @@ class HomePage extends GetView<HomeController> {
               },
             ),
             CustomListTile(
-                Icons.language, 'Language'.tr, () => selectedItem(context, 2)),
+                Icons.language, 'Language'.tr, () => selectedItem(context, 3)),
           ],
         ),
       ),

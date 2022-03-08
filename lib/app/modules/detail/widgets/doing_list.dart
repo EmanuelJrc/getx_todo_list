@@ -44,16 +44,16 @@ class DoingList extends StatelessWidget {
                               child: Checkbox(
                                 fillColor: MaterialStateProperty.resolveWith(
                                     (states) => Colors.grey),
-                                value: element['done'.tr],
+                                value: element['done'],
                                 onChanged: (value) {
-                                  homeCtrl.doneTodo(element['title'.tr]);
+                                  homeCtrl.doneTodo(element['title']);
                                 },
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 4.0.wp),
                               child: Text(
-                                element['title'.tr],
+                                element['title'],
                                 overflow: TextOverflow.ellipsis,
                               ),
                             )
