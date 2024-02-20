@@ -71,7 +71,7 @@ class AddCard extends StatelessWidget {
                       ),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: blue,
+                            backgroundColor: blue,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             minimumSize: const Size(150, 40),

@@ -15,7 +15,7 @@ import 'package:getx_todo_list/app/modules/report/view.dart';
 import 'package:getx_todo_list/theme/theme_service.dart';
 
 class HomePage extends GetView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +24,18 @@ class HomePage extends GetView<HomeController> {
         child: ListView(
           children: <Widget>[
             DrawerHeader(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: <Color>[
-                  Colors.deepOrange,
-                  Colors.orangeAccent
-                ])),
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/images/list.png',
-                      width: 20,
-                      height: 20,
-                    ),
-                  ),
-                )),
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: <Color>[Colors.deepOrange, Colors.orangeAccent])),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  'assets/images/list.png',
+                  width: 20,
+                  height: 20,
+                ),
+              ),
+            ),
             CustomListTile(
                 Icons.person, 'Profile'.tr, () => selectedItem(context, 0)),
             CustomListTile(Icons.notifications, 'Notification'.tr,
@@ -79,21 +76,18 @@ class HomePage extends GetView<HomeController> {
                       shrinkWrap: true,
                       physics: const ClampingScrollPhysics(),
                       children: [
-                        ...controller.tasks
-                            .map((element) => LongPressDraggable(
-                                data: element,
-                                onDragStarted: () =>
-                                    controller.changeDeleting(true),
-                                onDraggableCanceled: (_, __) =>
-                                    controller.changeDeleting(false),
-                                onDragEnd: (_) =>
-                                    controller.changeDeleting(false),
-                                feedback: Opacity(
-                                  opacity: 0.8,
-                                  child: TaskCard(task: element),
-                                ),
-                                child: TaskCard(task: element)))
-                            .toList(),
+                        ...controller.tasks.map((element) => LongPressDraggable(
+                            data: element,
+                            onDragStarted: () =>
+                                controller.changeDeleting(true),
+                            onDraggableCanceled: (_, __) =>
+                                controller.changeDeleting(false),
+                            onDragEnd: (_) => controller.changeDeleting(false),
+                            feedback: Opacity(
+                              opacity: 0.8,
+                              child: TaskCard(task: element),
+                            ),
+                            child: TaskCard(task: element))),
                         AddCard()
                       ],
                     ),
@@ -121,8 +115,9 @@ class HomePage extends GetView<HomeController> {
             ),
           );
         },
-        onAccept: (Task task) {
-          controller.deleteTask(task);
+        onAcceptWithDetails: (DragTargetDetails<Task> details) {
+          controller.deleteTask(
+              details.data); // Assuming details.data is the Task object
           EasyLoading.showSuccess('Delete Success'.tr);
         },
       ),
