@@ -7,65 +7,68 @@ import 'package:intl/intl.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class ReportPage extends StatelessWidget {
-  final homeCtrl = Get.find<HomeController>();
+  final HomeController homeCtrl = Get.find<HomeController>();
+
   ReportPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: Colors.black87,
-        body: SafeArea(
-      child: Obx(() {
-        var createdTasks = homeCtrl.getTotalTask();
-        var completedTasks = homeCtrl.getTotalDoneTask();
-        var liveTasks = createdTasks - completedTasks;
-        var percent = (completedTasks / createdTasks * 100).toStringAsFixed(0);
-        return ListView(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(4.0.wp),
-              child: Text(
-                'My Report'.tr,
-                style:
-                    TextStyle(fontSize: 24.0.sp, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.0.wp),
-              child: Text(
-                DateFormat.yMMMd().format(DateTime.now()),
-                style: TextStyle(
-                  fontSize: 14.0.sp,
-                  color: Colors.grey,
+      appBar: AppBar(
+        title: Text(
+          'My Report'.tr,
+          style: TextStyle(
+            fontSize: 24.0.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: Obx(() {
+          var createdTasks = homeCtrl.getTotalTask();
+          var completedTasks = homeCtrl.getTotalDoneTask();
+          var liveTasks = createdTasks - completedTasks;
+          var percent =
+              (createdTasks == 0 ? 0 : (completedTasks / createdTasks * 100))
+                  .toStringAsFixed(0);
+          return ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4.0.wp),
+                child: Text(
+                  DateFormat.yMMMd().format(DateTime.now()),
+                  style: TextStyle(
+                    fontSize: 14.0.sp,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 3.0.wp,
-                horizontal: 4.0.wp,
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 3.0.wp,
+                  horizontal: 4.0.wp,
+                ),
+                child: const Divider(thickness: 2),
               ),
-              child: const Divider(thickness: 2),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 3.0.wp,
-                horizontal: 5.0.wp,
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 3.0.wp,
+                  horizontal: 5.0.wp,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildStatus(Colors.green, liveTasks, 'Live Tasks'.tr),
+                    _buildStatus(Colors.orange, completedTasks, 'Completed'.tr),
+                    _buildStatus(Colors.blue, createdTasks, 'Created'.tr),
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildStatus(Colors.green, liveTasks, 'Live Tasks'.tr),
-                  _buildStatus(Colors.orange, completedTasks, 'Completed'.tr),
-                  _buildStatus(Colors.blue, createdTasks, 'Created'.tr),
-                ],
+              SizedBox(
+                height: 9.0.wp,
               ),
-            ),
-            SizedBox(
-              height: 9.0.wp,
-            ),
-            UnconstrainedBox(
-              child: SizedBox(
+              UnconstrainedBox(
+                child: SizedBox(
                   width: 70.0.wp,
                   height: 70.0.wp,
                   child: CircularStepProgressIndicator(
@@ -100,12 +103,14 @@ class ReportPage extends StatelessWidget {
                         )
                       ],
                     ),
-                  )),
-            )
-          ],
-        );
-      }),
-    ));
+                  ),
+                ),
+              )
+            ],
+          );
+        }),
+      ),
+    );
   }
 
   Row _buildStatus(Color color, int number, String text) {

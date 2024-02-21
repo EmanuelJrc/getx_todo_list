@@ -16,7 +16,7 @@ class DetailPage extends StatelessWidget {
     var task = homeCtrl.task.value!;
     var color = HexColor.fromHex(task.color);
     return PopScope(
-      canPop: false,
+      canPop: true,
       child: Scaffold(
         // backgroundColor:
         // Colors.black87, // Background color for entering a task thing box

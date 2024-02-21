@@ -11,7 +11,7 @@ class AddDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
+      canPop: true,
       child: Scaffold(
           body: Form(
         key: homeCtrl.formKey,

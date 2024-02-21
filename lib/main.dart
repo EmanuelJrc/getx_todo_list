@@ -6,19 +6,26 @@ import 'package:getx_todo_list/app/modules/home/view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:getx_todo_list/app/modules/report/view.dart';
 import 'package:getx_todo_list/theme/theme_service.dart';
 import 'package:getx_todo_list/theme/themes.dart';
 
 void main() async {
-  await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
   await Get.putAsync(() => StorageService().init());
+
+  final lang = GetStorage();
+  String? savedLanguage = lang.read('language');
+  if (savedLanguage != null) {
+    Get.updateLocale(Locale(savedLanguage.split('_')[0], savedLanguage.split('_')[1]));
+  }
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -26,13 +33,21 @@ class MyApp extends StatelessWidget {
       locale: Get.deviceLocale,
       fallbackLocale: Locale('en', 'US'),
       title: 'Todo List',
+      getPages: [
+        GetPage(name: '/', page: () => HomePage()),
+        GetPage(name: '/report', page: () => ReportPage()),
+      ],
       theme: Themes().lightTheme,
       darkTheme: Themes().darkTheme,
       themeMode: ThemeService().getThemeMode(),
-      home: const HomePage(),
+      home: HomePage(),
       debugShowCheckedModeBanner: false,
       initialBinding: HomeBinding(),
-      builder: EasyLoading.init(),
+      builder: (context, child) {
+        return FlutterEasyLoading( // Initialize the EasyLoading widget
+          child: child,
+        );
+      },
     );
   }
 }

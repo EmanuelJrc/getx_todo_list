@@ -3,56 +3,35 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:getx_todo_list/app/core/values/colors.dart';
 import 'package:getx_todo_list/app/data/models/task.dart';
-import 'package:getx_todo_list/app/modules/Sidebar/custom_list.dart';
 import 'package:getx_todo_list/app/modules/Sidebar/language.dart';
 import 'package:getx_todo_list/app/modules/Sidebar/settings.dart';
+import 'package:getx_todo_list/app/modules/home/app_drawer.dart';
 import 'package:getx_todo_list/app/modules/home/controller.dart';
 import 'package:getx_todo_list/app/core/utils/extensions.dart';
 import 'package:getx_todo_list/app/modules/home/widgets/add_card.dart';
 import 'package:getx_todo_list/app/modules/home/widgets/add_dialog.dart';
 import 'package:getx_todo_list/app/modules/home/widgets/task_card.dart';
 import 'package:getx_todo_list/app/modules/report/view.dart';
-import 'package:getx_todo_list/theme/theme_service.dart';
 
 class HomePage extends GetView<HomeController> {
-  const HomePage({super.key});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: <Color>[Colors.deepOrange, Colors.orangeAccent])),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  'assets/images/list.png',
-                  width: 20,
-                  height: 20,
-                ),
-              ),
-            ),
-            CustomListTile(
-                Icons.person, 'Profile'.tr, () => selectedItem(context, 0)),
-            CustomListTile(Icons.notifications, 'Notification'.tr,
-                () => selectedItem(context, 1)),
-            CustomListTile(
-              Icons.settings,
-              'Dark Mode'.tr,
-              () {
-                ThemeService().changeThemeMode();
-              },
-            ),
-            CustomListTile(
-                Icons.language, 'Language'.tr, () => selectedItem(context, 3)),
-          ],
+      key: _scaffoldKey, // Add the key to the scaffold
+      appBar: AppBar(
+        title: Text(
+          'My List'.tr,
+          style: TextStyle(
+            fontSize: 24.0.sp,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
-      // backgroundColor: Colors.black54, //Change the color of the main screen
+      drawer: AppDrawer(),
       body: Obx(
         () => IndexedStack(
           index: controller.tabIndex.value,
@@ -60,16 +39,6 @@ class HomePage extends GetView<HomeController> {
             SafeArea(
               child: ListView(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(4.0.wp),
-                    child: Text(
-                      'My List'.tr,
-                      style: TextStyle(
-                        fontSize: 24.0.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
                   Obx(
                     () => GridView.count(
                       crossAxisCount: 2,
@@ -129,27 +98,28 @@ class HomePage extends GetView<HomeController> {
         ),
         child: Obx(
           () => BottomNavigationBar(
-            onTap: (int index) => controller.changeTabIndex(index),
+            onTap: (int index) {
+              if (index == 1) {
+                Get.toNamed(
+                    '/report'); // Navigate to ReportPage using named route
+              } else {
+                controller.changeTabIndex(index);
+              }
+            },
             currentIndex: controller.tabIndex.value,
             showSelectedLabels: false,
             showUnselectedLabels: false,
             items: [
               BottomNavigationBarItem(
-                label: 'Home'.tr,
-                icon: Padding(
-                  padding: EdgeInsets.only(right: 15.0.wp),
-                  child: const Icon(
-                    Icons.apps,
-                  ),
+                label: 'My List'.tr,
+                icon: const Icon(
+                  Icons.apps,
                 ),
               ),
               BottomNavigationBarItem(
-                label: 'Report'.tr,
-                icon: Padding(
-                  padding: EdgeInsets.only(left: 15.0.wp),
-                  child: const Icon(
-                    Icons.data_usage,
-                  ),
+                label: 'My Report'.tr,
+                icon: const Icon(
+                  Icons.data_usage,
                 ),
               ),
             ],
@@ -158,8 +128,6 @@ class HomePage extends GetView<HomeController> {
       ),
     );
   }
-
-// Set what you want the buttons in the sidebar to do
 
   void selectedItem(BuildContext context, int index) {
     Navigator.of(context).pop();
